@@ -1,0 +1,54 @@
+﻿@model NPQIP.ViewModel.TrainingProgressViewModel
+
+@Html.HiddenFor(model => model.ReviewID)
+@Html.HiddenFor(model => model.PublicationPublicationID)
+@Html.HiddenFor(model => model.ChecklistID)
+
+@if (Model.Section != "")
+{ 
+    <div id="sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.SectionNumber)
+            @Html.Raw(Model.Section)
+        </h4>
+    </div>
+    <br />
+}
+<h5>
+    @Html.DisplayFor(model => model.ItemNumber)
+    @Html.DisplayFor(model => model.Item)
+</h5>
+
+<div class="row">
+    <div class="col-md-4">
+
+
+        <h5>@Html.DisplayNameFor(model => model.CorrectAnswer)
+            @Html.DisplayFor(model => model.CorrectAnswer)
+        </h5>
+        @if (Model.AllReviewCorrectRate >= 75)
+        {
+            <h4 class="green">
+                @Html.DisplayNameFor(model => model.AllReviewCorrectRate)
+                @Html.DisplayFor(model => model.AllReviewCorrectRate)%
+            </h4>
+        }
+        else
+        {
+            <h4 class="red">
+                @Html.DisplayNameFor(model => model.AllReviewCorrectRate)
+                @Html.DisplayFor(model => model.AllReviewCorrectRate)%  
+            </h4>                       
+        }
+    </div>
+
+    <br class="hidden-lg hidden-md" />
+
+    <div class="col-md-4">
+        <h5>@Html.DisplayNameFor(model => model.Comments)</h5>
+        <p>@Html.DisplayFor(model => model.Comments)</p>
+
+    </div>
+</div>
+
+<hr />

@@ -1,0 +1,55 @@
+﻿@model NPQIP.Models.UserProfile
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+@*<h2>Delete</h2>*@
+
+<h3>Are you sure you want to delete this?</h3>
+<section class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
+<dl class="dl-horizontal"> 
+    <dt>
+          @Html.DisplayNameFor(model => model.UserName)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.UserName)
+</dd>
+    <dt> @Html.DisplayNameFor(model => model.ForeName)</dt>
+    <dd>  @Html.DisplayFor(model => model.ForeName)</dd>
+
+      <dt> @Html.DisplayNameFor(model => model.SurName)</dt>
+    <dd> @Html.DisplayFor(model => model.SurName)</dd>
+
+      <dt> @Html.DisplayNameFor(model => model.Email)</dt>
+    <dd> @Html.DisplayFor(model => model.Email)</dd>
+
+      <dt>  @Html.DisplayNameFor(model => model.Institution)</dt>
+    <dd> @Html.DisplayFor(model => model.Institution)</dd>
+
+      <dt>  @Html.DisplayNameFor(model => model.Details)</dt>
+    <dd>  @Html.DisplayFor(model => model.Details)</dd>
+
+      <dt>   @Html.DisplayNameFor(model => model.CreateDate)</dt>
+    <dd>   @Html.DisplayFor(model => model.CreateDate)</dd>
+</dl>
+
+
+    
+@using (Html.BeginForm("DeleteUser", "Account"))
+{
+    @Html.HiddenFor(model => model.UserId)
+    @Html.HiddenFor(model => model.UserName)
+    
+    @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-danger btn-lg center-block">Delete </button> 
+     
+}
+     
+    </section>
+<div class="col-xs-12">
+  @Html.ActionLink("Back to List", "Users")
+     </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

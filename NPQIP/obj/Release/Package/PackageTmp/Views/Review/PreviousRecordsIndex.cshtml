@@ -1,0 +1,66 @@
+﻿@model IEnumerable<NPQIP.ViewModel.TrainingScoreViewModel>
+
+@{
+    ViewBag.Title = "View Previous Records";
+}
+
+<div class="col-md-12 row">
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>
+                   Read
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ScoreTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Points)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Score)
+                </th>
+                <th></th>
+                @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                {
+                    <th></th>
+                }
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("Read", "Review", new { id = item.PublicationPublicationID })"><i class="fa fa-file-text-o"></i>
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScoreTime)
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Pass)
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Points)/@Html.DisplayFor(modelItem => item.TotalPoints)
+
+                    </td>
+                    <td>@Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Read Marked Answers", "ViewRecord", new { scoreid = item.TrainingScoreID })
+                    </td>
+
+                    @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+                    {
+                        <td>
+                            @Html.ActionLink("Training Progress", "TrainingProgress", new { publicationid = item.PublicationPublicationID })
+                        </td>
+                    }
+
+                </tr>
+            }
+        </table>
+    </div>
+</div>

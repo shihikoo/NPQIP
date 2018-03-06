@@ -1,0 +1,38 @@
+﻿@model NPQIP.ViewModel.ChecklistReviewViewModel
+
+@if (Model.Section != "")
+{
+    <div id="sectionTitle" class="col-xs-12">
+        <h4 >
+            @Html.DisplayFor(model => model.SectionNumber).
+            @Html.Raw(Model.Section)
+        </h4>
+
+    </div>
+    <br />
+}
+<div class="col-xs-12">
+    @if (Model.Rate >= 0.8)
+    {
+        <h5 class="col-xs-1 green">
+            @Html.DisplayFor(m => m.Rate)
+        </h5>
+    }
+    else if (Model.Rate >=  0.5 && Model.Rate < 0.8)
+    {
+        <h5 class="col-xs-1 blue">
+            @Html.DisplayFor(m => m.Rate)
+        </h5>
+    }
+    else
+    {
+        <h5 class="col-xs-1 red">
+            @Html.DisplayFor(m => m.Rate)
+        </h5>
+    } 
+    <h5 class="col-xs-11 ">
+        @Html.DisplayFor(model => model.ItemNumber).
+        @Html.Raw(Model.Item)
+    </h5>
+</div>
+<hr/>

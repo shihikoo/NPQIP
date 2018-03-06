@@ -1,0 +1,109 @@
+﻿@model NPQIP.ViewModel.SummaryViewModel
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "Review Progress";
+}
+
+<h1 class="text-center">@ViewBag.Title</h1>
+<hr class="col-xs-12"/>
+<div class="col-xs-12">
+    <div class="row col-xs-10 col-xs-offset-1">
+        <h5><span class="green">Complete</span> <span class="yellow">Dual Reviewed </span><span class="blue">Single Reviewed </span><span class="">To be Reviewed </span></h5>
+    </div>
+
+    <div class="col-xs-10 col-xs-offset-1">
+        <div class="progress">
+            <div class="progress-bar progress-bar-success" aria-valuemin="0" aria-valuemax="100" style="@Model.NumCompletedInReconciliationStyleStr">
+                @Model.NumCompletedInReconciliation
+            </div>
+            <div class="progress-bar progress-bar-warning" aria-valuemin="0" aria-valuemax="100" style="@Model.NumCompletedByExternalReviewerStyleStr">
+                @Model.NumCompletedByExternalReviewer
+            </div>
+            <div class="progress-bar progress-bar-info" aria-valuemin="0" aria-valuemax="100" style="@Model.NumCompletedBySeniorReviewerStyleStr">
+                @Model.NumCompletedBySeniorReviewer
+            </div>
+            @*<div class="manul-center progress-bar progress-bar-primary" style="@Model.NumLeftStyleStr; background-color: lightgrey; background-image: none; color: black; font-weight: bold">
+            </div>*@
+            @Model.NumLeft
+        </div>
+        <br/>
+    </div>
+    <br/>
+</div>
+
+<div class="col-xs-12">
+    <div class="col-xs-10 col-xs-offset-1">
+        <br/><br/>
+        <div id="progresschart"></div>
+    </div>
+
+</div>
+
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+{
+    <hr class="col-xs-12" />
+    <div id="progresschartAdmin" class="col-xs-12">
+    </div>
+}
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart', 'bar', 'timeline'] });
+        google.charts.setOnLoadCallback(drawTrendlines);
+
+        function ConvertOADateToDate(oaDate){
+            var date = new Date();
+            date.setTime((oaDate - 25569) * 24 * 3600 * 1000);
+            return date;
+        }
+
+       function drawTrendlines() {
+
+        var dataArray = @Html.Raw(Json.Encode(Model.ProgressArray));
+        var data = new google.visualization.DataTable();
+        data.addColumn('date', 'Date');
+        data.addColumn('number', 'Number Reviewed');
+        data.addRows(10);
+        for (ii = 0; ii < 10; ii++) {
+            data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+            data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+        }
+
+        var options = {
+            title: 'Review Progress Chart',
+            height: 500,
+            colors: ['#7e1217'],
+            trendlines: {
+                0: { type: 'polynomial', lineWidth: 2, opacity: 0.3, color: 'green' }
+            },
+            vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publication Reviewed' },
+            //hAxis: {  maxValue: new Date(201, 6, 1)},
+            //legend: 'Accumulcated Number of Publication Reviewed'
+            legend: 'none'
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('progresschart'));
+        chart.draw(data, options);
+
+        var optionsAdmin = {
+            title: 'Review Projection Chart - Admin only',
+            height: 500,
+            colors: ['#7e1217'],
+            trendlines: {
+                0: { type: 'linear', lineWidth: 2, opacity: 1, color: 'red' }
+            },
+            vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publication Reviewed', maxValue: 2000 },
+            hAxis: {  maxValue: new Date(2017, 06, 1)},
+            legend: 'none'
+            //crosshair: { trigger: 'both' }
+        };
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('progresschartAdmin'));
+        chart.draw(data, optionsAdmin);
+    }
+
+    </script>
+
+
+

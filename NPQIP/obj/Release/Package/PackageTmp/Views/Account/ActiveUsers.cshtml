@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Active Users";
+}
+
+<div class="col-xs-12">
+    <div class="col-xs-6">
+        <h2>Active Users</h2>
+    </div>
+    <hr class="col-xs-12" />
+</div>
+
+<div id="OnlineUserList" class="col-xs-12 table-responsive">
+</div>
+
+<script type="text/javascript">
+    window.setInterval(function () {
+        $.post("@Url.Action("LoadOnlineUsers", "Account")")
+         .done(function (data) {
+             $("#OnlineUserList").html(data);
+         }, 60);
+    })
+</script>

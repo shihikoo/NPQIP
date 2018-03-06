@@ -1,0 +1,28 @@
+﻿@model IEnumerable<NPQIP.ViewModel.CertificateViewModel>
+
+
+@{
+    ViewBag.Title = "Certificate List";
+}
+
+@if (!Model.Any())
+{ 
+    <h4>Whoops, You haven't got any certificate yet. Hurry up to earn one!!! <a href="TrainingCover"><i></i></a></h4>
+
+}
+else
+{
+    foreach (var item in Model)
+    {
+    <a class="certificate col-xs-3" href="@Url.Action("Certificate", new { promotionid = item.promotionid })">
+        <div class="col-xs-12">
+            <img class="background" src="~/Images/Certificate of Reviewer transparent.png" alt="certificate" />
+        </div>
+        <div class="col-xs-12">
+            <h2>@item.role</h2>
+            <h4>@item.Date / @item.Month/ @item.Year</h4>
+        </div>
+    </a>
+
+    }
+}

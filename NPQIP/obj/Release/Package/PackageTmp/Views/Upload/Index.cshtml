@@ -1,0 +1,89 @@
+﻿@model IEnumerable<NPQIP.ViewModel.UploadOverviewViewModel>
+
+@{
+    ViewBag.Title = "Upload Files";
+}
+<h2>@ViewBag.Title</h2>
+<br />
+
+By @DateTime.Now, <strong>@ViewBag.CompletedRecord</strong> out of <strong></strong>of manuscripts .
+<br />
+<br />
+
+
+<form method="get">
+    <h5>
+        <input id="onlyUncompleted" name="onlyUncompleted" value="true" type="checkbox" />
+
+        <input type="hidden" value="false" name="onlyUncompleted" />
+
+        Only Uncompleted Records
+         &nbsp&nbsp          &nbsp&nbsp          &nbsp&nbsp  
+   @Html.DisplayNameFor(model => model.PublicationNumber):
+&nbsp&nbsp&nbsp    &nbsp 
+    <input type="search" name="searchTerm" />
+        &nbsp&nbsp&nbsp
+    <button type="submit" class="btn btn-warning">Search</button>
+
+    </h5>
+</form>
+<br />
+@if (@ViewBag.onlyUncompleted == "true") { ViewBag.uncompleted = "and uncompleted"; }
+<p>Found <strong>@Model.Count() </strong>manuscripts that contains "@ViewBag.searchTerm" @ViewBag.uncompleted</p>
+<br />
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>Nature Study</th>
+        <th colspan="3">Sister Study</th>
+    </tr>
+    <tr>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.PublicationNumber).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PublicationNumber") ? "PublicationNumber desc" : "PublicationNumber", searchTerm = ViewBag.searchTerm })
+        </th>
+
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfFiles).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfFiles") ? "NumberOfFiles desc" : "NumberOfFiles", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.PMID).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PMID") ? "PMID desc" : "PMID", searchTerm = ViewBag.searchTerm })
+        </th>
+        <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.LastUpdateTime).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PMID") ? "PMID desc" : "PMID", searchTerm = ViewBag.searchTerm })
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.PublicationNumber)*@
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.PublicationNumber).ToString(), "PubDetails", new { publicationnumber = item.PublicationNumber })
+                @*    &nbsp
+                                <a class="btn btn-sm btn-default" href = "@Url.Action("PubDetails", "Upload", new { publicationnumber = item.PublicationNumber })"><i class="fa fa-book"></i></a>*@
+
+            </td>
+            <td>
+                @if (item.NumberOfFiles > 0)
+                { ViewBag.uploadclass = "btn btn-default btn-sm"; }
+                else
+                { ViewBag.uploadclass = "btn btn-danger btn-sm font-white"; }
+
+                <a class="@ViewBag.uploadclass" href = "@Url.Action("Upload", "Upload", new { id = item.PublicationID })"><i class="fa fa-upload"></i>&nbsp<span class="badge">@item.NumberOfFiles</span></a>
+            </td>
+            <td>
+                @if (item.PMID > 0)
+                { ViewBag.uploadclass = "btn btn-default btn-sm"; }
+                else
+                { ViewBag.uploadclass = "btn btn-danger btn-sm font-white"; }
+
+                <a class="@ViewBag.uploadclass" href = "@Url.Action("PubEntry", "Upload", new { id = item.PublicationID })"><i class="fa fa-pencil"></i>&nbsp<span class="badge">  @item.PMID</span></a>
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdateTime)
+            </td>
+        </tr>
+    }
+
+</table>

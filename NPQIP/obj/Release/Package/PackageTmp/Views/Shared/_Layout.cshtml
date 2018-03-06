@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - NPQIP</title>
+    <link href="~/NPQIP.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="Title" content="NPQIP" />
+    <meta name="Description" content="Publication Standards Review Web Application" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>  
+    <nav id="navigationbar" class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div class="item active">
+                        <a href="@Url.Action("Index", "Home")"  class="navbar-brand" >NPQIP</a>
+                    </div>
+                </div>
+
+                <div class="navbar-collapse collapse" id="menu">
+                    @Html.Partial("_authorizedmenu")
+                    <div class="nav navbar-nav navbar-right" id="menu-right">
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="body" class="container theme-showcase clear-fix">
+        @RenderBody()
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="pull-right col-xs-12">
+                <ul id="bottommenu">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Background", "Background", "Home")</li>
+                    <li>@Html.ActionLink("Prizes", "Reward", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+
+                </ul>
+            </div>
+            <div class="pull-left">
+                <p>&copy; @DateTime.Now.Year NPQIP All Rights Reserved. </p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/jqueryui")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/bootstrapjquery")
+
+    @Scripts.Render("~/bundles/npqip")
+
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        window.setInterval(function () {
+            $.post("@Url.Action("Heartbeat", "Account", new {userName = User.Identity.Name})")
+        .done(function (data) {
+            // Possibly some code here 
+
+        });
+        }, 60000);
+    </script>
+
+</body>
+
+</html>

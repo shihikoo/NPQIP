@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title </h1>
+
+</hgroup>
+<hr />
+@*<section class="contact">
+<p>   Please email your contact person for any enquery. Thank you
+    </p> 
+</section>*@
+
+<section class="container tab-pane" id="contact">
+    @*            <div>
+                <h2>Contact Form</h2>
+            </div>*@
+
+    <form role="form" id="contactForm">
+        <div class="col-md-12">
+            <div id="loading" class="progress fade in">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" style="width: 100%">
+                    <span class="sr-only">Submitting</span>
+                </div>
+            </div>
+            <div id="formSubmitSuccess" class="alert alert-success fade in " role="alert" hidden>
+                <strong>Success!</strong>
+                <br/>
+                Thanks <span id="nameSpan"></span>. Your message has been submitted.
+                <br/>
+                You should shortly recieve an automated email.
+            </div>
+            <div id="formSubmitError" class="alert alert-danger fade in" role="alert" hidden>
+                <strong>Oops!</strong> The online contact form does not appear to be working as expected at the moment.<br/>
+                To register please contact NPQIP team directly at NPQIP.Team@ed.ac.uk
+            </div>
+            <div id="formSubmitNetworkError" class="alert alert-danger fade in" role="alert" hidden>
+                <button type="button" class="close" onclick="$('#formSubmitNetworkError').hide()"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                <strong>Oops!</strong> There appears to be a problem with the network connection.<br/>
+                Please check your internet connection and try again.<br/>
+                <br/>
+                If this error persists please directly contact NPQIP team at NPQIP.Team@ed.ac.uk
+            </div>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 ">
+
+            <input class="form-control" type="hidden" name="website" value="NPQIP" required/>
+
+            <div class="row form-group">
+                <label for="name" class="col-sm-2">Name *</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="name" placeholder="Name" required/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="email" class="col-sm-2">Email *</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="email" id="email" name="email" required placeholder="Email"/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="institution" class="col-sm-2">Institution*</label>
+                <div class="col-sm-8">
+                    <input class="form-control" type="text" name="institution" placeholder="Institute" required/>
+                </div>
+            </div>
+            <div class="row form-group">
+                <label for="subject" class="col-sm-2">Subject *</label>
+                <div class="col-sm-8">
+                    <select class="form-control" name="subject" required>
+                        <option value="General Question about NPQIP">General Question about NPQIP</option>
+                        <option value="Question about the NPQIP Website">Question about the NPQIP Website</option>
+                        <option value="Work with NPQIP">Work with NPQIP</option>
+                        <option value="Question about reviewing for NPQIP">Question about reviewing for NPQIP</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="message" class="col-sm-12 control-label">Message *</label><br/>
+                <div class="col-sm-12">
+                    <textarea rows="15" class="form-control" id="message" name="message" placeholder="Message"></textarea>
+                </div>
+            </div>
+
+            <div class="buttons formButtons pull-right form-group">
+
+                <button type="reset" class="btn btn-default">
+                    Reset
+                </button>
+                &nbsp &nbsp
+                <input id="btnSubmit" type="submit" class="btn btn-primary"/>
+            </div>
+
+            <div class="center-block  form-group row">
+                <h4>*<small>Required fields </small></h4>
+            </div>
+        </div>
+    </form>
+</section>
+
+@section scripts{
+   @Scripts.Render("~/bundles/contact") 
+}
+
+

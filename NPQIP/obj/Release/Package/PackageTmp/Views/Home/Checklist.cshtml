@@ -1,0 +1,41 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ChecklistViewModel>
+
+@{
+    ViewBag.Title = "Checklist";
+}
+
+<table class="table table-striped">
+    <thead>
+        <tr class="">
+            <th>Checklist Target</th>
+            <th>Item</th>
+
+            <th>Option Type</th>
+            <th>Options</th>
+            <th>Points</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (item.Section != "")
+                {
+                    <td colspan="5" class="background-grey font-white">@Html.DisplayFor(itemmodel => item.SectionNumber) . @Html.DisplayFor(itemmodel => item.Section)</td>
+                }
+            </tr>
+            <tr>
+                                <td>@Html.DisplayFor(itemmodel => item.ChecklistType)</td>
+                <td>@Html.DisplayFor(itemmodel => item.ItemNumber) . @Html.DisplayFor(itemmodel => item.Item)</td>
+                <td>@Html.DisplayFor(itemmodel => item.OptionType)</td>
+             
+                <td>@Html.DisplayFor(itemmodel => item.Options)</td>
+                   <td>@Html.DisplayFor(itemmodel => item.Points)</td>
+            </tr>
+            
+            
+            
+        }
+    </tbody>
+</table>

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<NPQIP.ViewModel.UsersViewModel>
+
+@{
+    ViewBag.Title = "Users";
+}
+<br class="hidden-lg" />
+<br class="hidden-lg" />
+<div class="col-xs-12">
+    <div class="col-xs-6">
+        <h2>Manage Users <span class="badge">@Model.Count()</span></h2>
+    </div>
+    <div class="col-xs-6">
+        <a href="@Url.Action("Register")" class="btn btn-success white-font pull-right btn-lg font-white"><i class="fa fa-user-plus white-font fa-2x"></i></a>
+    </div>
+    <hr class="col-xs-12" />
+
+</div>
+
+<div class="col-xs-12 table-responsive" id="UserList">
+    <table class="table table-hover text-center">
+        <tr class="text-center">
+              <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.UserId).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "UserId") ? "UserId desc" : "UserId"})
+            </th>
+            <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.Username).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "UserName") ? "UserName desc" : "UserName"})
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Name).ToString(), "Users", new {sortOrder = (ViewBag.sortOrder == "Name") ? "Name desc" : "Name"})
+
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.Email).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "Email") ? "Email desc" : "Email" })
+
+            </th>
+            <th>
+                  @Html.ActionLink(@Html.DisplayNameFor(model => model.Institution).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "Institution") ? "Institution desc" : "Institution"})
+    
+            </th>
+            <th>
+                  @Html.ActionLink(@Html.DisplayNameFor(model => model.Roles).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "Roles") ? "Roles desc" : "Roles"})
+            </th>
+            <th>
+                @Html.ActionLink(@Html.DisplayNameFor(model => model.TrainingStarted).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "Training") ? "Training desc" : "Training" })
+            </th>
+            <th>
+                  @Html.ActionLink(@Html.DisplayNameFor(model => model.CreateDate).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "CreateDate") ? "CreateDate desc" : "CreateDate"})
+          
+            </th>
+            <th>@Html.ActionLink(@Html.DisplayNameFor(model => model.suspended).ToString(), "Users", new { sortOrder = (ViewBag.sortOrder == "suspended") ? "suspended desc" : "suspended"})</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            var rowclass = item.suspended == true ? "danger" : "default";
+
+            <tr class= "@rowclass text-center">
+                 <td>
+                     @item.UserId
+                </td>
+                <td>
+                    <a href="@Url.Action("ReviewerQualityCheck", "Review", new {userid = item.UserId})">@Html.DisplayFor(modelItem => item.Username)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Institution)
+                </td>
+                <td>
+                    <a href="@Url.Action("ManageRoles", new {id = item.UserId})" class="white-font">@Html.DisplayFor(modelItem => item.Roles)
+                    </a>
+                </td>
+                <td>
+                        @Html.DisplayFor(modelItem => item.TrainingStarted)
+                                 /
+                        @Html.DisplayFor(modelItem => item.TrainingCompleted)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @if (item.suspended == false)
+                    {
+                        using (Html.BeginForm("SuspendUser", "Account", new { id = item.UserId }))
+                        {
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="btn btn-danger btn-xs ">Suspend</button>
+                        }
+                    }
+                    else
+                    {
+                        using (Html.BeginForm("UnSuspendUser", "Account", new { id = item.UserId }))
+                        {
+                        @Html.AntiForgeryToken()
+
+                        <button type="submit" class="btn btn-default btn-xs ">Unsuspend</button>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

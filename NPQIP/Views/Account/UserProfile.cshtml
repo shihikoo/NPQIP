@@ -1,0 +1,25 @@
+﻿@model NPQIP.Models.UserProfile
+
+@{
+    ViewBag.Title = Model.UserName + ": Profile";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div class="col-xs-3">
+<a class="btn btn-success font-white manul-center" href="@Url.Action("CertificateList","Review")"><i class="fa fa-certificate"></i>&nbsp View My latest certificate</a>
+
+</div>
+<div class="col-xs-3">
+    <a class="btn btn-danger font-white manul-center" href="@Url.Action("Manage","Account")"><i class="fa fa-wrench"></i>&nbsp Change my password</a>
+
+</div>
+<div class="col-xs-3">
+    <a class="btn btn-warning font-white manul-center" href="@Url.Action("Edit","Account")"><i class="fa fa-cogs"></i>&nbsp Edit my Profile</a>
+
+</div>
+<div class="col-xs-3">
+    <a class="btn btn-primary font-white manul-center" href="@Url.Action("ReviewerRecord","Review")"><i class="fa fa-trophy"></i>&nbsp View my NPQIP points</a>
+
+</div>

@@ -1,0 +1,58 @@
+﻿@model NPQIP.ViewModel.ReviewViewModel
+@using NPQIP.Utilities
+
+@Html.HiddenFor(model => model.ReviewID)
+@Html.HiddenFor(model => model.PublicationPublicationID)
+@Html.HiddenFor(model => model.ChecklistID)
+@Html.HiddenFor(model => model.UserName)
+@Html.HiddenFor(model => model.ItemNumber)
+
+@if (Model.Section != "")
+{    <div class="col-xs-12">
+    <div id="sectionTitle" class="col-xs-12">
+        <h4>
+            @Html.DisplayFor(model => model.SectionNumber).
+                    @Html.Raw(Model.Section)
+
+        </h4>
+    </div>
+    <br class="hidden-lg hidden-md" />
+    <br />
+    </div>
+}
+<div class="col-xs-12">
+    <br />
+    <p>
+        @Html.DisplayFor(model => model.ItemNumber).
+         @Html.Raw(Model.Item)
+    </p>
+</div>
+<div class="col-xs-12 ">
+    @if (Model.ChecklistID == 87)
+    {
+        @Html.DropDownListFor(model => model.OptionOptionID, (IEnumerable<SelectListItem>)TempData[Model.OptionType], new { @class = "hidden" })
+
+        <div class="col-xs-12">
+            @Html.TextAreaFor(model => model.Comments, new { @placeholder = "Optional Comments", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div> 
+    }
+    else
+    {
+        <div class="col-md-4 col-xs-12">
+            Reviews: 
+              @Html.DropDownListFor(model => model.OptionOptionID, (IEnumerable<SelectListItem>)TempData[Model.OptionType], string.Empty)
+            @Html.ValidationMessageFor(model => model.OptionOptionID)
+        </div>
+        <br class="hidden-lg hidden-md" /> <br class="hidden-lg hidden-md" />
+        <div class="col-md-8 col-xs-12">
+            @Html.TextAreaFor(model => model.Comments, new { @placeholder = "Optional Comments", @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Comments)
+        </div>
+    }
+    <br />
+    <hr class="col-xs-11" />
+    <br />
+</div>
+
+

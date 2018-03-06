@@ -1,0 +1,18 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ReviewInspectViewModel>
+
+
+@{
+    ViewBag.Title = "ReviewInspect";
+}
+
+<table class="col-xs-12">
+    <tr>
+        <th class="col-xs-1"> ID</th>
+        <th class="col-xs-1"> Publication Number</th>
+        <th class="col-xs-1"> Review Started </th>
+        <th class="col-xs-1"> Review Completed </th>
+        <th class="col-xs-1"> Possible Error?</th>
+        <th class="col-xs-7"> Reviewed By</th>
+    </tr>
+    @Html.DisplayForModel()
+</table>

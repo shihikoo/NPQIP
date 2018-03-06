@@ -1,0 +1,35 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ReviewComparisonViewModel>
+
+@{
+    ViewBag.Title = "Review Comparison";
+}
+
+<h2>@ViewBag.Title  -  @Model.Count() avaliable</h2>
+
+
+@if (ViewBag.sameReviewer)
+{
+<div class="red">
+Some publication reviewed by same user!</div>
+}
+
+
+<div class="col-xs-12">
+    <table class="table table-striped table-hover text-center">
+        <thead>
+            <tr>
+                <th></th>
+                <th>PublicationID</th>
+@if (User.Identity.Name == "jliao")
+{
+                <th>Agreement Percentage</th>}
+                <th>Completion Time</th>
+                <th>Reconcilation items left</th>         
+                <th></th><th></th>
+            </tr>
+        </thead>
+        @Html.EditorForModel()
+    </table>
+</div>
+
+

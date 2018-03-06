@@ -1,0 +1,200 @@
+﻿@model NPQIP.ViewModel.ReportViewModel
+
+@{
+    ViewBag.Title = "NPQIP Report";
+}
+
+<h1 class="text-center col-xs-12 row">@ViewBag.Title</h1>
+<hr />
+<section class="row">
+    <div class="col-xs-12 row">
+        <div class="col-md-6">
+            <div id="registrationChart"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="internalReviewChart"></div>
+        </div>
+
+    </div>
+    <div class="col-xs-12">
+        <div class="col-md-6">
+            <div id="registrationChart2"></div>
+        </div>
+        <div class="col-md-6">
+            <div id="internalReviewChart2"></div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="col-xs-10 col-xs-offset-1">
+            <div id="agreementRatioChart"></div>
+        </div>
+    </div>
+
+    <div id="chart_div"></div>
+    </section>
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      
+
+            google.charts.load('current', { 'packages': ['corechart', 'bar', 'timeline'] });
+
+            google.charts.setOnLoadCallback(DrawRegistrationChart);
+            google.charts.setOnLoadCallback(DrawRegistrationChart2);
+
+            google.charts.setOnLoadCallback(DrawInternalReviewChart);
+            google.charts.setOnLoadCallback(DrawInternalReviewChart2);
+
+            google.charts.setOnLoadCallback(DrawAgreementRatioChart);
+
+            function ConvertOADateToDate(oaDate) {
+                var date = new Date();
+                date.setTime((oaDate - 25569) * 24 * 3600 * 1000);
+                return date;
+            }
+
+            //----------- Registration --------------------
+            function DrawRegistrationChart() {
+                var dataArray =  @Html.Raw(Json.Encode(Model.RegistrationsProgressArray));
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Number Registrated');
+                data.addRows(24);
+                for (ii = 0; ii < 24; ii++) {
+                    data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+                    data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+                }
+
+                var options = {
+                    title: 'Number of Registrations',
+                    height: 500,
+                    colors: ['#7e1217'],
+                    vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Registrations' },
+                    legend: 'none'
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('registrationChart'));
+                chart.draw(data, options);
+            };
+
+            function DrawRegistrationChart2() {
+                var dataArray =  @Html.Raw(Json.Encode(Model.RegistrationsAverageArray));
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Number Registered');
+                data.addRows(24);
+                for (ii = 0; ii < 24; ii++) {
+                    data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+                    data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+                }
+
+                var options = {
+                    title: 'Number of Registrations Per Month',
+                    height: 500,
+                    colors: ['#7e1217'],
+                    vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publication Reviewed' },
+                    legend: 'none'
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('registrationChart2'));
+                chart.draw(data, options);
+            };
+
+            //----------- Internal Review --------------------
+            function DrawInternalReviewChart() {
+                var dataArray =  @Html.Raw(Json.Encode(Model.InternalReviewProgressArray));
+                var dataArray2 =  @Html.Raw(Json.Encode(Model.ExternalReviewProgressArray));
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Internal');
+                data.addColumn('number', 'External');
+                data.addRows(24);
+
+                for (ii = 0; ii < 24; ii++) {
+                    data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+                    data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+                    data.setCell(ii, 2, dataArray2[ii * 2 + 1]);
+                }
+
+                var options = {
+                    title: 'Number of Reviews',
+                    height: 500,
+                    colors: ['#5db8df', '#ed9e2e'],
+                    trendlines: {
+                        0: { type: 'linear', lineWidth: 2, opacity: 0.3, color: '#1b9e77' },
+                        1: { type: 'linear', lineWidth: 2, opacity: 0.3, color: '#d95f02' }
+                    },
+                    vAxis: {
+                        format: 'decimal',
+                        gridline: { count: 4 },
+                        title: 'Number of Publication Reviewed',
+                        maxValue:
+                            900
+                    }
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('internalReviewChart'));
+                chart.draw(data, options);
+            };
+
+            function DrawInternalReviewChart2() {
+                var dataArray =  @Html.Raw(Json.Encode(Model.InternalReviewAverageArray));
+                var dataArray2 =  @Html.Raw(Json.Encode(Model.ExternalReviewAverageArray));
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Date');
+                data.addColumn('number', 'Internal');
+                data.addColumn('number', 'External');
+                data.addRows(100);
+                for (ii = 0; ii < 100; ii++) {
+                    data.setCell(ii, 0, ConvertOADateToDate(dataArray[ii * 2]));
+                    data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+                    data.setCell(ii, 2, dataArray2[ii * 2 + 1]);
+                }
+
+                var options = {
+                    title: 'Number of Reviews Per Month',
+                    height: 500,
+                    colors: ['#5db8df', '#ed9e2e'],
+                    vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publication Reviewed' },
+
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('internalReviewChart2'));
+                chart.draw(data, options);
+            };
+    
+
+            function DrawAgreementRatioChart() {
+                var dataArray =  @Html.Raw(Json.Encode(Model.ReviewQualityArray));
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'Ratio');
+                data.addColumn('number', 'Agreement Ratio');
+                data.addRows(24);
+                for (ii = 0; ii < 24; ii++) {
+                    data.setCell(ii, 0, dataArray[ii * 2]);
+                    data.setCell(ii, 1, dataArray[ii * 2 + 1]);
+                }
+
+                var options = {
+                    title: 'Agreement Between Internal and External Reviews',
+                    height: 500,
+                    colors: ['green'],
+  
+                    vAxis: { format: 'decimal', gridline: { count: 4 }, title: 'Number of Publications' },
+                    hAxis: { title: 'Agreement in %' },
+
+                    legend: 'none'
+                };
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('agreementRatioChart'));
+
+
+                chart.draw(data, options);
+            };
+        
+    </script>
+
+
+

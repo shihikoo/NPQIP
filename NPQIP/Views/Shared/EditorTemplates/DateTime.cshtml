@@ -1,0 +1,7 @@
+﻿@model DateTime
+
+
+   @Html.TextBox(
+   string.Empty,
+   Model.ToString("yyyy-MM-dd"),
+   new { @class = "form-control", @type = "date" })

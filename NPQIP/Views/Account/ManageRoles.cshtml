@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Manage Roles";
+}
+
+<h2>Username:  @ViewBag.UserName</h2>
+<br />
+
+<div class="col-sm-4 col-sm-offset-1">
+    <h4>Current Roles:</h4>
+    <br />
+
+   
+        <table class="table">
+            @foreach (var item in ViewBag.RolesForThisUser)
+            {  
+                <tr>
+                    <td>@item </td>
+                  
+                    <td>
+                          @using (Html.BeginForm("DeleteRole", "Account"))
+    {        
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+                        <input hidden name="UserName" value = "@ViewBag.UserName" />
+                         <input hidden name="RoleName" value = "@item" />
+                        <input hidden name="UserId"  value = "@ViewBag.UserId" />
+
+                        <button type="submit" class="btn btn-sm btn-danger center-block">Remove</button>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    
+    <br />
+</div>
+
+<div class="col-sm-1 verticalLine hidden-xs">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+</div>
+
+<div class="col-sm-4 col-sm-offset-1 col-xs-8">
+    <h4>Add roles</h4>
+    <br />
+    @using (Html.BeginForm("AddRoles", "Account"))
+    { 
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <input hidden name="UserName" value = "@ViewBag.UserName" />
+        <input hidden name="UserId"  value = "@ViewBag.UserId" />
+ 
+        <div class="form-group col-xs-9 ">
+            @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, string.Empty, new { @class = "form-control" })
+        </div>
+        <div class="col-xs-3">
+            <button type="submit" class="btn btn-success center-block">Add</button>
+        </div>
+    }
+</div>
+
+<div class="col-xs-12">
+    @ViewBag.ResultMessage
+    <br />
+    <br />
+    @Html.ActionLink("Back to list", "Users")
+</div>

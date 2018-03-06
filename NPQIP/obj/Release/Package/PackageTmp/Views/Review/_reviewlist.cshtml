@@ -1,0 +1,216 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ReviewOverviewViewModel>
+
+<div class="col-md-12 row">
+    @{    var numberCompleted = 0;
+          ViewBag.serachRecordnumber = Model.Count();}
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <tr>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.PublicationVM.PublicationID).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "PublicationID") ? "PublicationID desc" : "PublicationID", searchTerm = ViewBag.searchTerm })
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.ExperimentTarget8).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "ExperimentTarget") ? "ExperimentTarget desc" : "ExperimentTarget", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist0
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist16).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist16") ? "NumberOfCompletedChecklist16 desc" : "NumberOfCompletedChecklist16", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist16
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist17).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist17") ? "NumberOfCompletedChecklist17 desc" : "NumberOfCompletedChecklist17", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist17
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist8).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist8") ? "NumberOfCompletedChecklist8 desc" : "NumberOfCompletedChecklist8", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist8
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist9).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist9") ? "NumberOfCompletedChecklist9 desc" : "NumberOfCompletedChecklist9", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist9
+                </th>
+                <th>
+                    @Html.ActionLink(@Html.DisplayNameFor(model => model.NumberOfCompletedChecklist10).ToString(), "Index", new { sortOrder = (ViewBag.sortOrder == "NumberOfCompletedChecklist10") ? "NumberOfCompletedChecklist10 desc" : "NumberOfCompletedChecklist10", searchTerm = ViewBag.searchTerm })
+                    <br />
+                    #/@ViewBag.numberofchecklist10
+                </th>
+                <th>Completed
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                var completed = true;
+
+                if (item.NumberOfCompletedChecklist0 == ViewBag.numberofchecklist0)
+                { ViewBag.temclass0 = "btn btn-default"; }
+                else
+                {
+                    ViewBag.temclass0 = "btn btn-danger font-white";
+                    completed = false;
+                }
+                if (item.ExperimentTarget.Contains("in vivo"))
+                {
+                    ViewBag.temclass16 = "hidden";
+
+                    if (item.NumberOfCompletedChecklist17 == ViewBag.numberofchecklist17)
+                    { ViewBag.temclass17 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass17 = "btn btn-danger font-white";
+                        completed = false;
+                    }
+                }
+                else if (item.ExperimentTarget.Contains("in vitro"))
+                {
+                    if (item.NumberOfCompletedChecklist16 == ViewBag.numberofchecklist16)
+                    { ViewBag.temclass16 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass16 = "btn btn-danger font-white";
+                        completed = false;
+                    }
+
+                    ViewBag.temclass17 = "hidden";
+                }
+                else if (item.ExperimentTarget.Contains("both"))
+                {
+                    if (item.NumberOfCompletedChecklist16 == ViewBag.numberofchecklist16)
+                    { ViewBag.temclass16 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass16 = "btn btn-danger font-white";
+                        completed = false;
+                    }
+
+                    if (item.NumberOfCompletedChecklist17 == ViewBag.numberofchecklist17)
+                    { ViewBag.temclass17 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass17 = "btn btn-danger font-white";
+                        completed = false;
+                    }
+                }
+                else
+                {
+                    ViewBag.temclass16 = "hidden";
+                    ViewBag.temclass17 = "hidden";
+                }
+
+                if (item.ExperimentTarget8 == "yes")
+                {
+                    if (item.NumberOfCompletedChecklist8 == ViewBag.numberofchecklist8)
+                    { ViewBag.temclass8 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass8 = " btn btn-danger font-white ";
+                        completed = false;
+                    }
+                }
+                else { ViewBag.temclass8 = "hidden"; }
+
+                if (item.NumberOfCompletedChecklist9 == ViewBag.numberofchecklist9)
+                { ViewBag.temclass9 = "btn btn-default"; }
+                else
+                {
+                    ViewBag.temclass9 = "btn btn-danger font-white";
+                    completed = false;
+                }
+
+                if (item.ExperimentTarget10 == "yes")
+                {
+                    if (item.NumberOfCompletedChecklist10 == ViewBag.numberofchecklist10)
+                    { ViewBag.temclass10 = "btn btn-default"; }
+                    else
+                    {
+                        ViewBag.temclass10 = "btn btn-danger font-white";
+                        completed = false;
+                    }
+                }
+                else
+                {
+                    ViewBag.temclass10 = "hidden";
+                }
+
+                if (completed) { numberCompleted = numberCompleted + 1; }
+
+                if (completed == false || @ViewBag.onlyUncompleted != "true")
+                {
+                <tr>
+                    <td>
+                        @item.PublicationVM.PublicationID
+                        <a class=""  target = "_blank" href="@Url.Action("Read", "Review", new{ id = item.PublicationVM.PublicationID})">
+                            <i class="fa fa-book"></i> 
+                        </a>
+
+                    </td>
+
+                    <td>
+                        @{ 
+                    string[] mystr = new string[3];
+                    mystr[0] = item.ExperimentTarget;
+                    mystr[1] = item.ExperimentTarget8;
+                    mystr[2] = item.ExperimentTarget10;
+                        }
+                        <a class="@ViewBag.temclass0" href = "@Url.Action("Review", "Review", new { reviewType = "Question0", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist0)</span></a>
+                    </td>
+                    <td>
+                        <a class="@ViewBag.temclass16" href = "@Url.Action("Review", "Review", new { reviewType = "Question16", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist16) </span></a>
+                    </td>
+                    <td>
+                        <a class="@ViewBag.temclass17" href = "@Url.Action("Review", "Review", new { reviewType = "Question17", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist17) </span></a>
+                    </td>
+                    <td>
+                        <a class="@ViewBag.temclass8" href = "@Url.Action("Review", "Review", new { reviewType = "Question8", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist8)</span></a>
+                    </td>
+                    <td>
+                        <a class="@ViewBag.temclass9" href = "@Url.Action("Review", "Review", new { reviewType = "Question9", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist9) </span></a>
+                    </td>
+                    <td>
+                        <a class="@ViewBag.temclass10" href = "@Url.Action("Review", "Review", new { reviewType = "Question10", id = item.PublicationVM.PublicationID })"><i class="fa fa-pencil"></i><span class="badge">@Html.DisplayFor(modelItem => item.NumberOfCompletedChecklist10) </span></a>
+                    </td>
+
+                    <td>
+
+                        @(completed == true ? Html.CheckBox("completedreview", new {value = true, @checked = true, disabled = "disabled"}) : Html.CheckBox("completedreview", new {value = false, disabled = "disabled"}))
+
+
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+    @{  
+        if (@ViewBag.onlyUncompleted == "true")
+        {
+            ViewBag.serachRecordnumber = @ViewBag.totalpubReview - numberCompleted;
+            ViewBag.uncompleted = "and uncompleted";
+        }
+        else { ViewBag.uncompleted = ""; }
+    }
+    <br />
+
+<br />
+    @{
+        ViewBag.CompletePercentage = (numberCompleted * 1.0 / ViewBag.totalPubReview * 100).ToString();
+        ViewBag.progressbarstyle = "width: " + ViewBag.CompletePercentage + "%;"; 
+    }
+    <div class="row">
+        <div class="col-md-5">By @DateTime.Now, you have completed @numberCompleted/@ViewBag.totalPubReview publications:</div>
+        <div class="col-md-6">
+            <div class="progress">
+                <div class="progress-bar-warning" role="progressbar"  aria-valuenow = "@ViewBag.CompletePercentage" aria-valuemin="10" aria-valuemax="100"  style = "@ViewBag.progressbarstyle">
+                    &nbsp&nbsp&nbsp    @numberCompleted/@ViewBag.totalPubReview
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

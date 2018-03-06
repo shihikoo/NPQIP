@@ -1,0 +1,38 @@
+﻿@using NPQIP
+@model IEnumerable<NPQIP.ViewModel.ReviewListViewModel>
+@{
+    const int OngoingPublicationLimit = (int)Enums.OngoingPublicationLimit.Number;
+}
+
+@if (!Model.Any())
+{ 
+    <h4>You have no uncompleted training.</h4>
+
+}
+else
+{
+    <div class="col-xs-12">
+        <h3>
+            Active Reviewing Publications
+
+            <small>You may only keep @OngoingPublicationLimit pending publication open.</small>
+
+        </h3>    
+        <div class="table-responsive  col-xs-12 col-xs-offset-0 col-sm-12">
+            <table class="table striped-table">
+                <thead>
+                    <tr>
+                        <th>Manuscript No.</th>
+                        <th>Last updated time</th>
+                        <th> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.EditorForModel()
+                </tbody>
+            </table>
+        </div>
+        <hr />
+    </div>
+   
+}

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ReviewListViewModel>
+
+@{
+    ViewBag.title = "Ongoing Trainings";
+}
+
+@if (!Model.Any())
+{ 
+    <h4>You have no uncompleted training.</h4>
+}
+else
+{
+    <div class="table-responsive  col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1  col-md-8 col-md-offset-2">
+        <table class="table striped-table">
+            <thead>
+                <tr>
+                    <th>Manuscript No.</th>
+                    <th>Last updated time</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @Html.EditorForModel()
+            </tbody>
+        </table>
+    </div>
+}

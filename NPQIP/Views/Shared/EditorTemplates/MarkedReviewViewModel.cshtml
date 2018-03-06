@@ -1,0 +1,73 @@
+﻿@model NPQIP.ViewModel.MarkedReviewViewModel
+
+@Html.HiddenFor(model => model.ReviewID)
+@Html.HiddenFor(model => model.PublicationPublicationID)
+@Html.HiddenFor(model => model.ChecklistID)
+
+@if (Model.Section != "")
+{ 
+    
+    <div id="sectionTitle">
+        <h4>
+            @Html.DisplayFor(model => model.SectionNumber).
+    @Html.Raw(Model.Section)
+        </h4>
+
+    </div>
+    <br />
+}
+<h5>
+    @if (Model.Correct)
+    {
+        <i class="fa fa-check green fa-2x"></i> }
+    else
+    {
+        <i class="fa fa-times red fa-2x"></i>  
+    }
+
+    @Html.DisplayFor(model => model.ItemNumber).
+    @Html.Raw(Model.Item)
+</h5>
+
+<div class="row">
+    <div class="col-md-4">
+
+
+        <h5>@Html.DisplayNameFor(model => model.CorrectAnswer)
+            @Html.DisplayFor(model => model.CorrectAnswer)
+
+        </h5>
+
+        @if (Model.Correct)
+        {
+            <h5 class="green">@Html.DisplayNameFor(model => model.YourAnswer)
+                @Html.DisplayFor(model => model.YourAnswer)
+            </h5>
+
+        }
+        else
+        {
+            <h5 class="red">@Html.DisplayNameFor(model => model.YourAnswer)
+                @Html.DisplayFor(model => model.YourAnswer)
+            </h5>
+        }
+
+
+    </div>
+
+    <br class="hidden-lg hidden-md" />
+        <div class="col-md-4">
+        <h5>@Html.DisplayNameFor(model => model.Comments)</h5>
+        <p>@Html.DisplayFor(model => model.Comments)</p>
+
+    </div>
+     <br class="hidden-lg hidden-md" />
+     <div class="col-md-4">
+        <h5>@Html.DisplayNameFor(model => model.YourComments)</h5>
+        <p>@Html.DisplayFor(model => model.YourComments)</p>
+
+    </div>
+
+</div>
+
+<hr />

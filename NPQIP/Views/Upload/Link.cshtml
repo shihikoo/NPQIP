@@ -1,0 +1,53 @@
+﻿@model IEnumerable<NPQIP.Models.File>
+
+@{
+    ViewBag.Title = "Link";
+}
+
+<h2><a class="btn btn-info btn-lg pull-right font-white" href="@Url.Action("Link", new { makelink = true })">Link Files to Publications</a>
+
+    <br /><br />
+
+</h2>
+<div  class="table-responsive">
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FileID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationPublicationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationPublicationNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileUrl)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationPublicationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationPublicationNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FileUrl)
+        </td>
+    </tr>
+}
+
+</table>
+    </div>

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<NPQIP.ViewModel.MarkedReviewViewModel>
+
+@{
+    ViewBag.Title = "View Record";
+}
+
+<h3>
+    You scored @ViewBag.trainingscore.Points over @ViewBag.trainingscore.TotalPoints on @ViewBag.trainingscore.ScoreTime</h3>
+    @if(ViewBag.trainingscore.Pass) {
+    <h3 class="green">You passed  this review </h3>
+    }
+    else {
+       <h3 class="blue"> You did not pass  this review</h3>
+    }
+<br />
+        <div>        
+            @Html.EditorForModel()
+        </div>
+<br />

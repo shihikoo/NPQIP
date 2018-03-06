@@ -1,0 +1,22 @@
+﻿@model NPQIP.ViewModel.CertificateViewModel
+
+
+@{
+    ViewBag.Title = "Certificate";
+    Layout = "~/Views/Shared/_CertificateLayout.cshtml";
+}
+
+<div class="certificate col-xs-12">
+    <div class="col-xs-12 background">
+        <img src="~/Images/Certificate of Reviewer transparent.png" alt="certificate" />
+    </div>
+    <h1 class="manul-center name">@Model.name</h1>
+    @*<h1>@Model.role</h1>*@
+    <div class="time col-xs-5 manul-center ">
+        <h4>[@Model.Date / @Model.Month]</h4>
+        <h2>[@Model.Year]</h2>
+    </div>
+    <div class="pull-right logo">
+        <img src="~/Images/camarades-logo-transparent-small.png" alt="certificate" />
+    </div>
+</div>

@@ -1,0 +1,213 @@
+﻿@model NPQIP.ViewModel.ScoringBoardViewModel
+
+@{
+    ViewBag.Title = "Leaderboard";
+}
+
+<div class="col-xs-12  col-md-6 table-responsive">
+    <h2 class="text-primary text-center bold">
+        <i class="fa fa-trophy"></i>&nbsp @ViewBag.Title &nbsp <i class="fa fa-trophy">&nbsp</i>&nbsp
+    </h2>
+    <table class="table table-striped text-center">
+        <tr>
+            <th class="text-center col-xs-1">Rank</th>
+            <th class="text-center col-xs-5">Username</th>
+            @if (HttpContext.Current.User.Identity.Name == "jliao")
+            {
+                <th class="text-center col-xs-5"> Email</th>
+            }
+            <th class="text-center col-xs-2">Review #</th>
+            <th class="text-center col-xs-4">Latest active time</th>
+        </tr>
+        @{var i = 1; }
+        @foreach (var item in Model.RankedReviewerAllTimeVMs)
+        {
+            var colorstyle = "";
+            if (item.nReviewCompleted >= 10)
+            {
+                colorstyle = "blue bold";
+            }
+
+            <tr>
+                <td class="text-center">@i</td>
+                <td class="text-center">
+                    @Html.DisplayFor(itemmodel => item.username)
+                    @if (item.CompletedTrainingProgram)
+                    {
+                        <i class="fa fa-check-circle text-success"></i>}
+                    @switch (i)
+                    {
+                        case 1:
+                            <i class="fa fa-trophy gold"></i>
+                            colorstyle = "gold bold";
+                            break;
+                        case 2:
+                            <i class="fa fa-trophy silver"></i>
+                            colorstyle = "silver bold";
+                            break;
+                        case 3:
+                            <i class="fa fa-trophy bronze"></i>
+                            colorstyle = "bronze bold";
+                            break;
+                    }
+                </td>
+                @if (HttpContext.Current.User.Identity.Name == "jliao")
+                {
+                    <td class="text-center"> @Html.DisplayFor(itemmodel => item.email)</td>
+                }
+                <td class="text-center @colorstyle">
+                    @Html.DisplayFor(itemmodel => item.nReviewCompleted)
+                </td>
+                <td class="text-center">@Html.DisplayFor(itemmodel => item.LastActiveTime)</td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>
+
+<div class="col-xs-12 col-md-6">
+
+    <div class="col-xs-12 table-responsive">
+        <h3 class="text-center col-xs-12 text-info bold">External Reviewer of the Month</h3>
+        <br/>
+        <table class="table table-striped text-center col-xs-12">
+            <tr>
+                <th class="text-center col-xs-1">Rank</th>
+                <th class="text-center col-xs-5">Username</th>
+
+                <th class="text-center col-xs-2">Review #</th>
+                <th class="text-center col-xs-4">Latest active time</th>
+            </tr>
+            @{i = 1; }
+            @foreach (var item in Model.RankedExternalReviewerMonthVMs)
+            {
+                var colorstyle = "";
+                if (item.nReviewCompleted >= 10)
+                {
+                    colorstyle = "blue bold";
+                }
+
+                <tr>
+                    <td class="text-center">@i</td>
+                    <td class="text-center">
+                        @Html.DisplayFor(itemmodel => item.username)
+                        @if (item.CompletedTrainingProgram)
+                        {
+                            <i class="fa fa-check-circle text-success"></i>}
+                        @switch (i)
+                        {
+                            case 1:
+                                <i class="fa fa-trophy gold"></i>
+                                colorstyle = "gold bold";
+                                break;
+                            case 2:
+                                <i class="fa fa-trophy silver"></i>
+                                colorstyle = "silver bold";
+                                break;
+                            case 3:
+                                <i class="fa fa-trophy bronze"></i>
+                                colorstyle = "bronze bold";
+                                break;
+                        }
+                    </td>
+
+                    <td class="text-center @colorstyle">
+                        @Html.DisplayFor(itemmodel => item.nReviewCompleted)
+                    </td>
+                    <td class="text-center">@Html.DisplayFor(itemmodel => item.LastActiveTime)</td>
+                </tr>
+                i++;
+            }
+        </table>
+    </div>
+
+    <br/><br/><br/>
+
+    <hr class="col-xs-12"/>
+
+    <br /><br /><br />
+
+    <div class="col-xs-12">
+        <h3 class="col-xs-12 text-center">Trainees awarded certificates this month</h3>
+        <br/>
+        <div class="col-xs-7 col-xs-offset-1">
+            @foreach (var name in @Model.TrainingCompletedNames)
+            {
+                <p class="text-success">
+                    <i class="fa fa-certificate" aria-hidden="true"></i>
+                    @name
+                </p>
+            }
+        </div>
+    </div>
+
+    <hr class="col-xs-12" />
+
+    <div class="text-center col-xs-12 table-responsive">
+        <br/><br/><br/>
+        <img src="~/Images/FestiveChallenge2.png" style="width: 100%;" alt="Festive Challenge"/>
+
+        @if (@DateTime.Compare(DateTime.Now, new DateTime(2016, 11, 1)) > -1)
+        {
+            if (@DateTime.Compare(DateTime.Now, new DateTime(2017, 1, 1)) > -1)
+            {
+                <h5 class="text-success"> The challenge has completed on 23:59:59 31/12/2016 GMT. </h5>
+            }
+            <table class="table table-striped text-center col-xs-12">
+                <tr>
+                    <th class="text-center col-xs-1">Rank</th>
+                    <th class="text-center col-xs-5">Username</th>
+               
+                    <th class="text-center col-xs-2">Review #</th>
+                    <th class="text-center col-xs-4">Latest active time</th>
+                </tr>
+                @{ i = 1; }
+                @foreach (var item in Model.RankedFestiveChanneledgeVMs)
+                {
+                    var colorstyle = "";
+                    if (item.nReviewCompleted >= 10)
+                    {
+                        colorstyle = "blue bold";
+                    }
+
+                    <tr>
+                        <td class="text-center">@i</td>
+                        <td class="text-center">
+                            @Html.DisplayFor(itemmodel => item.username)
+                            @if (item.CompletedTrainingProgram)
+                            {
+                                <i class="fa fa-check-circle text-success"></i>}
+                            @switch (i)
+                            {
+                                case 1:
+                                    <i class="fa fa-trophy gold"></i>
+                                    colorstyle = "gold bold";
+                                    break;
+                                case 2:
+                                    <i class="fa fa-trophy silver"></i>
+                                    colorstyle = "silver bold";
+                                    break;
+                                case 3:
+                                    <i class="fa fa-trophy bronze"></i>
+                                    colorstyle = "bronze bold";
+                                    break;
+                            }
+                        </td>
+
+                        <td class="text-center @colorstyle">
+                            @Html.DisplayFor(itemmodel => item.nReviewCompleted)
+                        </td>
+                        <td class="text-center">@Html.DisplayFor(itemmodel => item.LastActiveTime)</td>
+                    </tr>
+                    i++;
+                }
+            </table>
+        }
+        else
+        {
+            <h4>Coming soon on November 1st</h4>
+        }
+
+    </div>
+
+</div>

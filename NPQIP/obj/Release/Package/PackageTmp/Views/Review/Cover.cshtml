@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Review";
+}
+
+<div>
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">NPQIP Review Programme</h2>
+                </div>
+            </div>
+            <br />
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x program">
+                         <a href="@Url.Action("TrainingCover")">
+                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                        <i class="fa fa-book fa-stack-1x fa-inverse"></i>
+                               </a>
+                    </span>
+                    <a href="@Url.Action("TrainingCover")" class="cover-title"><h4 class="service-heading">Training Courses</h4> </a>
+                    <p class="text-muted">Start learning all about reviewing manuscripts.</p>
+                </div>
+               
+                @if (User.IsInRole("Reviewer") || User.IsInRole("SeniorReviewer") || User.IsInRole("Administrator"))
+                {
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x program">
+                            <a href="@Url.Action("MyReviewProgress")">
+                            <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                            <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                          </a>
+                        </span>
+
+                         <a href="@Url.Action("MyReviewProgress")" class="cover-title"><h4 class="service-heading">Review Publications</h4></a>
+                        <p class="text-muted">Start the hard work.</p>
+                    </div>
+                }
+                else {
+                 <div class="col-md-4">
+                        <span class="fa-stack fa-4x program">
+                            <i class="fa fa-circle fa-stack-2x text-default"></i>
+                            <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                        </span>
+
+                        <h4 class="service-heading">Review Publications</h4>
+                     <p>Review will be open to reviewer who passes the training program</p>
+                    </div>               
+                }
+
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x program">
+                         <a href="@Url.Action("ReviewerRecord", new { username = User.Identity.Name })">
+                        <i class="fa fa-circle fa-stack-2x text-danger"></i>
+                        <i class="fa fa-trophy fa-stack-1x fa-inverse"></i>
+                        </a>
+                    </span>
+                    <a href="@Url.Action("ReviewerRecord", new {username = User.Identity.Name})" class="cover-title"><h4 class="service-heading">Achievement</h4> </a>
+                 
+                    <p class="text-muted">@Html.Raw(@ViewBag.Message) </p>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+

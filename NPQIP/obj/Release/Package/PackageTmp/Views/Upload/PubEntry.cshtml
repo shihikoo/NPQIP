@@ -1,0 +1,87 @@
+﻿@model NPQIP.ViewModel.PublicationViewModel
+
+@{
+    ViewBag.Title = "PubEntry";
+}
+
+<h2>Publicatin Number: @Model.PublicationNumber</h2>
+<section class="col-xs-12">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PublicationID)
+          @Html.HiddenFor(model => model.PublicationNumber)
+        <div class="row col-xs-12">
+
+            <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PMID)
+
+                    @Html.TextBoxFor(model => model.PMID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PMID)
+                </div>
+
+                <div class="alert alert-warning" role="alert">You may edit the information below if nesseary. If you do, please describe the changes and explain the reason for it in the comments area. Thank you.</div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExperimentType)
+
+                    @Html.DropDownListFor(m => m.ExperimentType, new SelectList(new[] { string.Empty, "in vivo", "in vitro", "both" }), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ExperimentType)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Country)
+
+                    @Html.TextBoxFor(model => model.Country, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Country)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PublicationDate)
+
+                    @Html.EditorFor(model => model.PublicationDate, new { @class = "form-control"})
+
+
+
+                    @Html.ValidationMessageFor(model => model.PublicationDate)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Species)
+
+                    @Html.TextBoxFor(model => model.Species, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Species)
+                </div>
+
+@*                <div class="form-group">
+                    @Html.LabelFor(model => model.Keywords)
+
+                    @Html.TextAreaFor(model => model.Keywords, new { @class = "form-control", rows = "6" })
+                    @Html.ValidationMessageFor(model => model.Keywords)
+                </div>*@
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comments)
+
+                    @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", rows = "3" })
+                    @Html.ValidationMessageFor(model => model.Comments)
+                </div>
+
+                <div class="row col-xs-12">
+                    <div class="col-sm-offset-5">
+                        <button type="submit" class="btn btn-warning btn-lg">Save</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default btn-lg" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

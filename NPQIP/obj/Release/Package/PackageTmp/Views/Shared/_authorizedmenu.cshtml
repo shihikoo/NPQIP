@@ -1,0 +1,78 @@
+﻿<ul class="nav navbar-nav">
+
+    @if (Request.IsAuthenticated)
+    {
+        if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Administrator"))
+        { <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cogs"></i><span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Users", "Users", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                </li>
+                <li>@Html.ActionLink("Active Users", "ActiveUsers", "Account")
+                </li>
+                <li>
+                    @Html.ActionLink("Item Review", "ChecklistReview", "Review")
+            </li>
+                <li>
+                    @Html.ActionLink("Uncompleted Reviews", "UncompletedReviewInspect", "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("Report", "Report", "Home")
+            </li>
+                <li>
+                    @Html.ActionLink("Output", "Output", "Home")
+                </li>
+
+                @if (HttpContext.Current.User.Identity.Name == "admin")
+                {
+                    <li>@Html.ActionLink("Edit Gold Standard", "GoldStandardList", "Review")
+                    </li>
+                }
+                <li>@Html.ActionLink("Checklist", "Checklist", "Home")
+                </li>
+                @if (HttpContext.Current.User.Identity.Name == "jliao")
+                {
+                    <li>@Html.ActionLink("Link", "Link", "Upload")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Review Inspect", "ReviewInspect", "Home")
+                </li>
+                }
+
+
+            </ul>
+        </li>
+        }
+
+        if (Request.IsAuthenticated && (HttpContext.Current.User.IsInRole("Uploader")))
+        {
+        <li>@Html.ActionLink("Upload", "Index", "Upload")
+        </li>
+        }              
+        <li>@Html.ActionLink("Review", "Cover", "Review")
+        </li>
+        <li>
+            @Html.ActionLink("Progress", "Summary", "Home")
+        </li>
+        <li>
+            @*@Html.ActionLink("Review Resource", "ReviewResource", "Review", null,new {@target="_blank" })*@
+            <a href="https://ecrf1.clinicaltrials.ed.ac.uk/npqip/content/NatureReviewResource.pdf" target="_blank">Review Resource</a>
+        </li>
+
+        <li>@Html.ActionLink("Leaderboard", "FinalRankingTable", "Home")
+        </li>
+        
+                if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Reconciler") | !Request.IsAuthenticated && HttpContext.Current.User.IsInRole("Reconciler"))
+        {
+            @*
+        <li>@Html.ActionLink("Experiment Type", "EditExperimentType", "Review")
+        </li>  *@ 
+
+        <li>@Html.ActionLink("Reconciliation", "ReviewComparison", "Review")
+        </li>   
+
+        }
+    }
+
+</ul>

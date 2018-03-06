@@ -1,0 +1,72 @@
+﻿@model NPQIP.ViewModel.ReconciliationViewModel
+
+@Html.HiddenFor(model => model.Review1ID)
+@Html.HiddenFor(model => model.Review2ID)
+@Html.HiddenFor(model => model.PublicationPublicationID)
+@Html.HiddenFor(model => model.ChecklistID)
+
+
+@{
+    string colortype = "red";
+    if (Model.Agree) { colortype = "green"; }
+}
+
+@if (Model.Section != "")
+{   
+    <div id="sectionTitle" class ="col-xs-12">
+        <h4 class="col-xs-12">
+            @Html.DisplayFor(model => model.SectionNumber).
+    @Html.Raw(Model.Section)
+        </h4>
+    </div>
+    <br />
+}
+
+<div class="col-xs-12 row">
+    <h5>
+        @Html.DisplayFor(model => model.ItemNumber).@Html.Raw(Model.Item)
+    </h5>
+</div>
+
+<div class="col-xs-12 row">
+    <div class="col-md-4">
+        <h5 class = "@colortype">@Html.DisplayNameFor(model => model.Answer1)
+            @Html.DisplayFor(model => model.Answer1)
+        </h5>
+        <h5>@Html.DisplayNameFor(model => model.Comments1)</h5>
+        <p>@Html.DisplayFor(model => model.Comments1)</p>
+    </div>
+
+    <div class="col-md-4">
+        <h5 class = "@colortype">@Html.DisplayNameFor(model => model.Answer2)
+            @Html.DisplayFor(model => model.Answer2)
+        </h5>
+        @*<br class="hidden-lg hidden-md" />*@
+        <h5>@Html.DisplayNameFor(model => model.Comments2)</h5>
+        <p>@Html.DisplayFor(model => model.Comments2)</p>
+    </div>
+    <div class="col-md-4">
+        @Html.HiddenFor(model => model.Review3ID)
+        @*@if (Model.Agree != true)
+        {*@
+            <h5>@Html.LabelFor(model => model.Answer3)
+                 @Html.DropDownListFor(model => model.Option3ID, (IEnumerable<SelectListItem>)TempData[Model.OptionType], string.Empty, new { @class = "form-control" })
+               @Html.ValidationMessageFor(model => model.Option3ID)
+
+            </h5>
+                             @Html.LabelFor(model => model.Comments3)
+
+                    @Html.TextAreaFor(model => model.Comments3, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Comments3)
+        @*}
+        else {
+        
+         @Html.HiddenFor(model => model.Option3ID)
+             @Html.HiddenFor(model => model.Comments3)
+        }*@
+        <br />
+    </div>
+  
+</div>
+
+<hr />

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<NPQIP.ViewModel.ReviewOverviewViewModel>
+
+@{
+    ViewBag.Title = "Review";
+}
+
+@*<h5 class="pull-right">@Html.ActionLink("check the criteria", "help")</h5>*@
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="col-sm-12 row">
+    <form method="get">
+        <h5>
+            <input id="onlyUncompleted" name="onlyUncompleted" value="true" type="checkbox" />
+
+            <input type="hidden" value="false" name="onlyUncompleted" />
+
+            Only Uncompleted Records
+         &nbsp&nbsp  &nbsp    &nbsp 
+       @Html.DisplayNameFor(model => model.PublicationVM.PublicationID):&nbsp 
+    <input type="search" name="searchTerm" />
+            &nbsp&nbsp&nbsp   &nbsp   
+            <button type="submit" class="btn btn-warning">Search</button>
+        </h5>
+    </form>
+</div>
+
+@Html.Partial("_reviewlist", Model)
+
+

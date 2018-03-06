@@ -1,0 +1,21 @@
+﻿@model IEnumerable<NPQIP.Models.FrontPageReview>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        <div>        
+            @Html.EditorForModel()
+        </div>
+    <br />
+    
+   <input hidden name ="previousURL"  value="@ViewBag.PreviousUrl "/>
+    
+    <div class="col-xs-12"> 
+                 <br /><br />
+        <div class="manul-center">
+            <button id="Save" type="submit" class="btn btn-danger btn-lg">&nbsp;Save&nbsp;</button>
+        </div>
+    </div>
+}

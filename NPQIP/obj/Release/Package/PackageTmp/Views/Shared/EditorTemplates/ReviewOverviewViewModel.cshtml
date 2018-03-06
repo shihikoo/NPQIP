@@ -1,0 +1,9 @@
+﻿@model NPQIP.ViewModel.ReviewListViewModel
+
+<tr>
+    <td>@Model.PublicationID </td>
+    <td>@Model.UpdateTime </td>
+    <td>
+        <a class="btn btn-info font-white btn-sm" href="@Url.Action("ReviewIndex", new { id = Model.PublicationID })">Continue &nbsp<i class="fa fa-pencil-square-o"></i></a>
+    </td>
+</tr>

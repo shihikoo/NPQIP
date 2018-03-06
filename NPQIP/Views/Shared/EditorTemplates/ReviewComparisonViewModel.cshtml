@@ -1,0 +1,51 @@
+﻿@model NPQIP.ViewModel.ReviewComparisonViewModel
+
+
+<tr >
+  <td> <a class="btn btn-success btn-xs font-white" href="@Url.Action("ReconciliationComplete", new {pubid = @Model.PublicationID})">Reconciliation Complete</a>      
+    </td>
+
+    <td>
+        @Html.DisplayFor(m => m.PublicationID)
+
+    </td>
+
+    @*<td>
+      
+    </td>*@
+ 
+        @if (User.Identity.Name == "jliao")
+
+        {
+    <td>
+        @String.Format("{0,14:P1}", Model.Agreement)
+        @if (Model.userId1 == Model.userId2)
+                {
+            <div class="red">
+                reviewed by same user:
+                @Html.DisplayFor(m => m.userId1),
+                @Html.DisplayFor(m => m.userId2)
+            </div>
+        }
+
+
+    </td>
+        }
+
+    <td>
+        @Model.LastUpdateDateTime
+    </td>
+    <td>
+        @Model.NumLeftString
+
+    </td>
+
+    <td><a href="@Url.Action("Read", "Review", new {id = Model.PublicationID})" target="_blank">
+        <i class="fa fa-book fa-lg"></i>
+    </a></td>
+    <td>
+        <a href="@Url.Action("Reconciliation", "Review", new {rc1 = Model.ReviewIDs.FirstOrDefault(), rc2 = Model.ReviewIDs.LastOrDefault()})"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+    </td>
+
+</tr>
+

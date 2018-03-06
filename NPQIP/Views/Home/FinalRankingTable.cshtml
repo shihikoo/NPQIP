@@ -1,0 +1,128 @@
+﻿@model NPQIP.ViewModel.FinalRankingTableViewModel
+
+@{
+    ViewBag.Title = "RankingTables";
+}
+
+<div class="col-xs-12  col-md-6 table-responsive">
+    <h2 class="text-primary text-center bold">
+        <i class="fa fa-trophy"></i>&nbsp Review Leaderboard <i class="fa fa-trophy">&nbsp</i>&nbsp
+    </h2>
+    <table class="table table-striped text-center">
+        <tr>
+            <th class="text-center col-xs-1">Rank</th>
+            <th class="text-center col-xs-5">Username</th>
+            @if (HttpContext.Current.User.Identity.Name == "jliao")
+            {
+                <th class="text-center col-xs-5"> Email</th>
+            }
+            <th class="text-center col-xs-2">Review #</th>
+            <th class="text-center col-xs-4">Latest active time</th>
+        </tr>
+        @{var i = 1; }
+        @foreach (var item in Model.RankedReviewerAllTimeVMs)
+        {
+            var colorstyle = "";
+            if (item.nReviewCompleted >= 10)
+            {
+                colorstyle = "blue bold";
+            }
+
+            <tr>
+                <td class="text-center">@i</td>
+                <td class="text-center">
+                    @Html.DisplayFor(itemmodel => item.username)
+                    @if (item.CompletedTrainingProgram)
+                    {
+                        <i class="fa fa-check-circle text-success"></i>}
+                    @switch (i)
+                    {
+                        case 1:
+                            <i class="fa fa-trophy gold"></i>
+                            colorstyle = "gold bold";
+                            break;
+                        case 2:
+                            <i class="fa fa-trophy silver"></i>
+                            colorstyle = "silver bold";
+                            break;
+                        case 3:
+                            <i class="fa fa-trophy bronze"></i>
+                            colorstyle = "bronze bold";
+                            break;
+                    }
+                </td>
+                @if (HttpContext.Current.User.Identity.Name == "jliao")
+                {
+                    <td class="text-center"> @Html.DisplayFor(itemmodel => item.email)</td>
+                }
+                <td class="text-center @colorstyle">
+                    @Html.DisplayFor(itemmodel => item.nReviewCompleted)
+                </td>
+                <td class="text-center">@Html.DisplayFor(itemmodel => item.LastActiveTime)</td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>
+
+
+<div class="col-xs-12  col-md-6 table-responsive">
+    <h2 class="text-primary text-center bold">
+        <i class="fa fa-trophy"></i>&nbsp Reconciliation Leaderboard <i class="fa fa-trophy">&nbsp</i>&nbsp
+    </h2>
+    <table class="table table-striped text-center">
+        <tr>
+            <th class="text-center col-xs-1">Rank</th>
+            <th class="text-center col-xs-5">Username</th>
+            @if (HttpContext.Current.User.Identity.Name == "jliao")
+            {
+                <th class="text-center col-xs-5"> Email</th>
+            }
+            <th class="text-center col-xs-2">Review #</th>
+            <th class="text-center col-xs-4">Latest active time</th>
+        </tr>
+        @{i = 1; }
+        @foreach (var item in Model.ReconcileRankedReviewerAllTimeVMs)
+        {
+            var colorstyle = "";
+            if (item.nReviewCompleted >= 10)
+            {
+                colorstyle = "blue bold";
+            }
+
+            <tr>
+                <td class="text-center">@i</td>
+                <td class="text-center">
+                    @Html.DisplayFor(itemmodel => item.username)
+                    @if (item.CompletedTrainingProgram)
+                    {
+                        <i class="fa fa-check-circle text-success"></i>}
+                    @switch (i)
+                    {
+                        case 1:
+                            <i class="fa fa-trophy gold"></i>
+                            colorstyle = "gold bold";
+                            break;
+                        case 2:
+                            <i class="fa fa-trophy silver"></i>
+                            colorstyle = "silver bold";
+                            break;
+                        case 3:
+                            <i class="fa fa-trophy bronze"></i>
+                            colorstyle = "bronze bold";
+                            break;
+                    }
+                </td>
+                @if (HttpContext.Current.User.Identity.Name == "jliao")
+                {
+                    <td class="text-center"> @Html.DisplayFor(itemmodel => item.email)</td>
+                }
+                <td class="text-center @colorstyle">
+                    @Html.DisplayFor(itemmodel => item.nReviewCompleted)
+                </td>
+                <td class="text-center">@Html.DisplayFor(itemmodel => item.LastActiveTime)</td>
+            </tr>
+            i++;
+        }
+    </table>
+</div>

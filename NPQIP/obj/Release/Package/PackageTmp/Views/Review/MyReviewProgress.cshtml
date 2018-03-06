@@ -1,0 +1,26 @@
+﻿@model NPQIP.ViewModel.ReviewProgressViewModel
+
+<div class="col-xs-12 text-center">
+    <h3>Your Review Progress</h3>
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" aria-valuenow="(@Model.NumberOfCompletedReviews/@Model.TotalNumber).ToString()" aria-valuemin="0" aria-valuemax="100"  role="progressbar" style="min-width: 2em; @Model.StyleOfCompletedReviews">
+            <span class="sr-only">35% Complete (success)</span> @Model.NumberOfCompletedReviews
+        </div>
+        <div class="progress-bar progress-bar-warning progress-bar-striped" aria-valuenow="(@Model.NumberOfActiveReviews/@Model.TotalNumber).ToString()" aria-valuemin="0" aria-valuemax="100"  role="progressbar" style="min-width: 2em; @Model.StyleOfActiveReviews">
+            <span class="sr-only">20% In progress (warning)</span> @Model.NumberOfActiveReviews
+        </div>
+        @Model.NumberOfToReviews
+    </div>
+    <hr />
+</div>
+
+@Html.Partial("_activeReviewlist", Model.ReviewInProgress)
+
+<div class="col-xs-12">
+    <br/>
+    <br/>
+
+    <div class="col-xs-4 col-xs-offset-4 @Model.newPublicationAvaliabilityStyle ">
+        <a class="btn btn-primary btn-lg font-white manul-center @Model.newPublicationAvaliabilityStyle" href="@Url.Action("ReviewIndexNew", new {purpose = NPQIP.Enums.reviewPurpose.Review})">Review a new publication <i class="fa fa-angle-double-right"></i></a>
+    </div>
+</div>

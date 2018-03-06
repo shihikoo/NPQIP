@@ -1,0 +1,54 @@
+﻿@model NPQIP.ViewModel.FrontPageViewModel
+@using NPQIP.Utilities
+@{
+    ViewBag.Title = "Experiment Type Input";
+}
+<div class="col-xs-12">
+
+    @ViewBag.Numberleft Publications left.
+</div>
+<br />
+<div class="col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 ">
+    <div class="col-xs-12 ">
+        <div class="center-block manul-center">
+            <h4 class="">Read Manuscript </h4>
+            <p class="fa-stack fa-2x program">
+                <a href="@Url.Action("Read", "Review", new { id = Model.PublicationID })"  target = "_blank">
+                    <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                    <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                </a>
+            </p>
+        </div>
+        <br />
+        <br />
+        <div class="col-xs-12">
+            <div class="center-block manul-center">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)         
+                             
+                    @Html.Partial("_frontpagereviewPartial", Model.FrontPageReviews)
+
+                    
+                  @*  <div class="col-xs-12">
+                        @Html.HiddenFor(model => model.PublicationID)
+                        Experiment Type: 
+                @Html.DropDownListFor(model => model.ExperimentTypeByReviewer, (IEnumerable<SelectListItem>)TempData["11"], string.Empty)
+                        @Html.ValidationMessageFor(model => model.ExperimentTypeByReviewer)
+                    </div>
+    
+                    <input hidden name ="previousURL"  value="@ViewBag.PreviousUrl "/>
+    
+                    <div class="col-xs-12">
+                        <br />
+                        <div class="manul-center">
+                            <button id="Save" type="submit" class="btn btn-danger">&nbsp;Save&nbsp;</button>
+                        </div>
+                    </div>*@
+                }
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

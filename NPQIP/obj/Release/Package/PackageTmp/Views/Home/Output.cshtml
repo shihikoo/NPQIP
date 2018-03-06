@@ -1,0 +1,74 @@
+﻿@model IEnumerable<NPQIP.Models.OutputViewModel>
+
+@{
+    ViewBag.Title = "Output";
+}
+
+<table class="table">
+    <tr>@if (ViewBag.Complete)
+    {
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+    }
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationPublicationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewCompletionReviewCompletionID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PMID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PubDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ChecklistChecklistID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Optoin)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @if(ViewBag.Complete) {  
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationPublicationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewCompletionReviewCompletionID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PMID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PubDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChecklistChecklistID)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Optoin)
+        </td>
+    </tr>
+}
+</table>

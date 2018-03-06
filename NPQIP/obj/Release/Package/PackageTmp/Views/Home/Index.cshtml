@@ -1,0 +1,65 @@
+﻿@model NPQIP.Models.LoginModel
+
+@{
+    ViewBag.Title = "Welcome";
+}
+<section class="col-md-7 col-xs-12">
+
+   <h1 id="home-title">@ViewBag.Title to<br /><small> <span>N</span>ature <span>P</span>ublication <span>Q</span>uality <span>I</span>mprovement <span>P</span>roject</small></h1>
+   <br />
+
+    @*<h3>Background</h3>
+
+    <p>
+        Few publications describing in vivo and in vitro research report taking measures which might reduce the risk of bias in their findings (Ioannidis et al., 2014; Macleod et al., 2015),
+        and those which do not report such measures give inflated estimates of biological effects (Crossley et al., 2008; Hirst et al., 2014).
+        Measures which may improve the quality of reports of in vivo and in vitro research have been endorsed by a large number of journals, 
+        however, there is evidence that this endorsement has not been matched by a substantial increase in the quality of published reports (Baker et al., 2014).
+    </p>
+    
+    <h3>The NPQIP study</h3>*@
+
+    <p><em> Nature Journals </em> introduced a change in their editorial policy which required authors in the life sciences to complete a checklist in their submissions, indicating whether or not they had taken
+        certain measures which might reduce the risk of bias and to report key experimental and analytical details. NPQIP (<a href="http://link.springer.com/article/10.1007/s11192-016-1964-8 ">protocol</a>)
+     is a study that assesses any impact of this change.</p>
+
+
+    <p> Publications will be assessed and scored by two independent reviewers; a third reviewer will reconcile any discrepancies between the two reviewers. 
+ </p>
+  
+    <p>
+        This is a fantastic project to get involved in. By reviewing scientific papers as part of this project, you will have the opportunity to:
+    </p>
+    <ul>
+        <li>Contribute to improving the quality of pre-clinical in vivo and in vitro
+   research
+</li>
+        <li>Gain impressive critical appraisal skills and increase your understanding
+            of the level of reporting required in pre-clinical research
+        </li>
+        <li>Be credited as a collaborator in a high impact publication when the results are
+            published – a fantastic step for scientists at all stages of their career (we plan
+            for the listing of contributions to follow the format for the <a href="http://www.ncbi.nlm.nih.gov/pubmed/25892679">AVERT trial </a>)
+        </li>
+
+        <li>You can also earn prizes for the number of manuscripts you review, such
+   as a USB stick, Netflix/Spotify subscriptions and even iPads - find out
+            more about the  <a href="@Url.Action("Reward","Home")">prizes here <i class="fa fa-tablet text-danger fa-lg" aria-hidden="true"></i></a>
+</li>
+    </ul>
+@if (!Request.IsAuthenticated)
+{
+    <p>We are currently recruiting new reviewers and would greatly appreciate your support as a collaborator. </p>
+
+    <p>In order to become a reviewer on this project, we have set up a training module that is a prerequisite to becoming a reviewer.
+
+        To register for the training, please <a class="btn btn-danger font-white" href="@Url.Action("Register", "Account")">sign up </a>
+    </p>
+}
+</section>
+
+
+<div class="col-md-offset-1 col-md-4 col-xs-12">
+    <a class="twitter-timeline" href="https://twitter.com/hashtag/NPQIP" data-widget-id="803268476404121600">#NPQIP Tweets</a>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+</div>

@@ -1,0 +1,126 @@
+﻿@model NPQIP.Models.TrainingCoverViewModel
+@{
+    ViewBag.Title = "Training Program";
+}
+
+<section id="home" class="screen-height">
+    <div class="home-overlay"></div>
+
+    <div>
+        <div class="row">
+            <br />
+            <br />
+            <div class="col-xs-12 text-center">
+                <h2 class="section-heading">NPQIP Reviewer Training Program</h2>
+                <h3 class="section-subheading text-muted">First step to become a professional manuscript reviewer</h3>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+        <div class="col-md-3 col-md-offset-0 col-xs-offset-1 col-xs-10">
+            <a href="@Url.Action("PreviousRecordsIndex")" class="center-block  btn btn btn-success font-white btn-lg @Model.ViewPreviouseRecordStyle">View Previous Records
+            </a>
+            <br class="hidden-lg hidden-md" />
+        </div>
+
+        <div class="col-md-3 col-md-offset-0 col-xs-offset-1 col-xs-10">
+            <a href="@Url.Action("UncompletedTrainingList")" class="center-block btn btn-danger font-white btn-lg @ViewBag.OngoingTrainingStyle">Ongoing Training </a>
+            <br class="hidden-lg hidden-md" />
+        </div>
+
+                <div class="col-md-3 col-md-offset-0 col-xs-offset-1 col-xs-10">
+                    <a href="@Url.Action("ReviewIndexNew", new {purpose = NPQIP.Enums.reviewPurpose.Training})"
+                        class="center-block btn btn-primary font-white btn-lg @Model.NewPublicationStyle">@Html.Raw(Model.NewTrainingText) </a>
+            <br class="hidden-lg hidden-md" />
+        </div>
+
+        <div class="col-md-3 col-md-offset-0 col-md-offset-1 col-xs-offset-1 col-xs-10">
+            <a type="button" class="center-block btn btn-warning font-white btn-lg @Model.ArchivePublicationStyle" data-toggle="modal" data-target="#ArchiveRecords">Archive Previous Records
+            </a>
+            <!-- Modal -->
+            <div class="modal fade" id="ArchiveRecords" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Are you sure you want to archive all your records?</h4>
+                        </div>
+                        <div class="modal-body">
+                            You will not be able to see your previous records any more once you archive all your previous records.
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a href="@Url.Action("ArchiveRecord", "Review", null)" class="btn btn-warning font-white">Archive
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 row">
+            <br />
+            <br />
+            <br />
+            <br />
+
+        </div>
+        <div class="col-xs-12">
+            <h3>How the Program works?</h3>
+            <hr />
+            <h4>Repeat this procedure until your score is above 80% 3 times in a row.</h4>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <span class="fa-stack fa-4x program">
+                        <i class="fa fa-folder fa-stack-2x text-info"></i>
+                        <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4>Read Publications</h4>
+                </div>
+                <div class="col-md-1">
+                    <span class="fa-stack fa-4x program">
+                        <i class="fa fa-long-arrow-right fa-stack-1x"></i>
+                    </span>
+                </div>
+
+                <div class="col-md-3">
+                    <span class="fa-stack fa-4x program">
+                        <i class="fa fa-square fa-stack-2x text-info"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+
+                    </span>
+                    <h4>Fill up the checklist</h4>
+                </div>
+                <div class="col-md-1">
+                    <span class="fa-stack fa-4x program">
+                        <i class="fa fa-long-arrow-right fa-stack-1x"></i>
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <span class="fa-stack fa-4x program">
+                        <i class="fa fa-star fa-stack-2x text-info"></i>
+                        <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4>Read the correct answers</h4>
+                </div>
+
+
+            </div>
+            <br />
+            <br />
+            
+            <div class="col-md-12 row">
+                <h4 class="red">Please read the <a href="https://ecrf1.clinicaltrials.ed.ac.uk/npqip/content/NatureReviewResource.pdf" target="_blank">review resource</a> before starting reivew publications.</h4>
+                <h4>There are ten training publications total availiable online. You will be given one publication randomly each time. Archive previous records is possible if one does not meet the requirement after working through all traning publications. </h4>
+            </div>
+        </div>
+
+    </div>
+</section>
+<br />
+<br />
+<br />
+
+

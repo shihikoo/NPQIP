@@ -1,0 +1,50 @@
+﻿@model IEnumerable<NPQIP.ViewModel.UncompletedReviewInspectViewModel>
+
+@{
+    ViewBag.Title = "Uncompleted Review Inspect";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReviewedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumCompleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastTimeUpdated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastActiveTime)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublicationID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReviewedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumCompleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastTimeUpdated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastActiveTime)
+        </td>
+        <td>
+            @Html.ActionLink("Archive", "ArchiveReview", new { userId=item.userid, publicationId = item.PublicationID  }, new {@class= "font-white btn btn-warning" }) 
+        </td>
+    </tr>
+}
+
+</table>

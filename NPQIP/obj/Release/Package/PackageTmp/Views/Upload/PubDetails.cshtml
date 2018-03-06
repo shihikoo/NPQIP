@@ -1,0 +1,58 @@
+﻿@model NPQIP.ViewModel.PublicationViewModel
+
+@{
+    ViewBag.Title = "Publication Number: ";
+}
+
+<h3>@ViewBag.Title @Model.PublicationNumber </h3>
+<br />
+<table class="table table-bordered">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.PMID)
+        </th>
+
+        <td>@Html.DisplayFor(model => model.PMID)
+        </td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.PublicationDate)
+        </th>
+        <td>@Html.DisplayFor(model => model.PublicationDate)
+        </td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Country)
+        </th>
+        <td>@Html.DisplayFor(model => model.Country)
+        </td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Species)
+        </th>
+        <td>@Html.DisplayFor(model => model.Species)
+        </td>
+    </tr>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.ExperimentType)
+        </th>
+        <td>@Html.DisplayFor(model => model.ExperimentType)
+        </td>
+    </tr>
+@*    <tr>
+        <th>@Html.DisplayNameFor(model => model.Keywords)
+        </th>
+        <td>@Html.DisplayFor(model => model.Keywords)
+        </td>
+    </tr>*@
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <td>@Html.DisplayFor(model => model.Comments)
+        </td>
+    </tr>
+</table>
+<br /><br />
+<p >
+
+    @Html.ActionLink("Back to List", "Index")
+</p>

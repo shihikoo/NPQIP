@@ -1,0 +1,74 @@
+﻿@model NPQIP.ViewModel.TrainingScoreViewModel
+
+@{
+    ViewBag.Title = "Scoring";
+    var score = 100.0 * Model.Points / Model.TotalPoints;
+}
+
+<section class="col-xs-12">
+    @if (Model.Pass)
+    {
+        <h1 class="green manul-center center-block"><i class="fa fa-check">&nbsp</i>You passed! Great job!</h1> 
+    }
+    else if(score > 70)
+    {
+        <h2 class="manul-center blue">Almost there. Please try again.</h2> 
+    }
+    else 
+    {   
+         <h2 class="manul-center blue">You did not pass this training test. Please try again.</h2> 
+    }
+
+    <br />
+    <h4 class="manul-center">Your scored @Model.Points over @Model.TotalPoints (@Model.Score)</h4>
+
+    <br />
+    <div class="col-md-offset-3 col-md-3">
+        <a class="btn btn-info  font-white btn-lg" href="@Url.Action("ViewRecord", new { scoreid = Model.TrainingScoreID })"><i class="fa fa-file-text-o"></i>&nbsp View Correct Answers</a>
+    </div>
+    <div class="col-md-offset-0 col-md-4">
+        <a class="btn btn-primary font-white btn-lg" href="@Url.Action("TrainingCover")"><i class="fa fa-pencil-square-o"></i>&nbsp Review Another Manuscript</a>
+    </div>
+    <div class="col-md-2"></div>
+</section>
+
+@if (Model.Promoted) {
+<section class="col-xs-12">
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="center-block manul-center col-xs-12">
+        <h1 class="blue"><i class="fa fa-graduation-cap fa-2x"></i>Congratulations!!! <i class="fa fa-graduation-cap fa-2x"></i></h1>
+        <h3 class="">You have just passed the training course. You are now officially a NPQIP reviewer.
+            You may find your
+
+            <a class="btn btn-primary font-white" href="@Url.Action("Certificate", new { promotionid = Model.promotion.PromotionID })"><i class="fa fa-graduation-cap">&nbsp</i>Certificate </a>
+        </h3>
+        <h3 class="green">Can't wait to review more publications? 
+ <a class="btn btn-success font-white btn-lg" href="@Url.Action("MyReviewProgress")">Start Reviewing NPQIP Publications Now <i class="fa fa-angle-double-right"></i></a>
+        </h3>
+    </div>
+    <br />
+</section>
+
+}
+
+<section class="col-xs-12">
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <a class="btn btn-default " href="@Url.Action("Cover")"><i class="fa fa-mail-reply"></i>&nbsp Back to the Training Program</a>
+
+</section>
+
+
+
+
+
+
+

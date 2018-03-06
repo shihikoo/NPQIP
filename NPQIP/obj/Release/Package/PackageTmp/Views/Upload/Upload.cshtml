@@ -1,0 +1,99 @@
+﻿@model IEnumerable<NPQIP.ViewModel.UploadViewModel>
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h3>
+    @Html.DisplayNameFor(model => model.PublicationNumber) :   @ViewBag.PublicationNumber</h3>
+
+<h4>You current have <strong>@ViewBag.N documents </strong>for this manuscript</h4>
+
+@if (ViewBag.N > 0)
+{
+    <table class="table table-hover table-striped col-sm-12">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EntryUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comments)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.FileName, "DownloadDocument", new { fileNumber = item.FileID , id = "ManuscriptNo" + item.PublicationPublicationID.ToString() }, new { target = "_blank" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntryUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastUpdateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Comments)
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Upload", new { id = item.FileID }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-default btn-xs ">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+<br />
+
+<h2>Upload More Files</h2>
+<div class="col-sm-12">
+    <form method="post" enctype="multipart/form-data" id="uploadform">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationMessage("FileUpload")
+        @ViewBag.Error
+        <div class="row">
+            <div class="col-sm-6">
+                <h4>@Html.DisplayNameFor(model => model.FileName)</h4>
+
+                <input hidden type="text" name="publicationid" value="@TempData["PublicationID"]"   />
+                <input hidden type="text" name="publicationnumber" value="@TempData["PublicationNumber"]"   />
+                <input type="text" name="inputfilename" placeholder="Optional. NO extention is needed." class="form-control" />
+                <h4>@Html.DisplayNameFor(model => model.Comments)</h4>
+                <textarea rows="4" placeholder="Optional" name="inputcomments" form="uploadform" class="form-control"></textarea>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <h4>@Html.DisplayNameFor(model => model.FileUpload)</h4>
+                    <input type="file" name="uploadfile" id="upload" />
+                    <p class="help-block">The maximum size of each is 100MB.
+                        <br />
+                        Acceptable format: pdf, doc, docx, EPS, BMP, GIF, JPG, PNG, tif, zip.</p>
+                    <br />
+                    <br />
+                </div>
+
+                <div class="col-sm-8 col-sm-offset-4">
+                    <button type="submit" class="btn btn-lg btn-warning">Upload</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default btn-lg" })
+                </div>
+            </div>
+        </div>
+    </form>
+    <br />
+    <br />
+    <br />
+</div>
+
+

@@ -1,0 +1,78 @@
+﻿@model NPQIP.Models.UserProfile
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<section class="col-sm-12">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="row">
+
+            @Html.HiddenFor(model => model.UserId)
+            @Html.HiddenFor(model => model.CreateDate)
+            @Html.HiddenFor(model => model.LastHeartbeat)
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName)
+
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ForeName)
+
+                    @Html.TextBoxFor(model => model.ForeName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ForeName)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SurName)
+
+                    @Html.TextBoxFor(model => model.SurName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SurName)
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email)
+
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Institution)
+
+                    @Html.TextBoxFor(model => model.Institution, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Institution)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Details)
+
+                    @Html.TextAreaFor(model => model.Details, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Details)
+                </div>
+            </div>
+        </div>   
+        <div class="row">
+            <button type="submit" class="btn btn-danger btn-lg center-block">Save</button>
+        </div>
+    }
+</section>
+<div class="col-xs-12">
+      <br /><br /> <br />
+        <a class="btn btn-default btn-lg" onclick="window.history.back()">Back</a>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

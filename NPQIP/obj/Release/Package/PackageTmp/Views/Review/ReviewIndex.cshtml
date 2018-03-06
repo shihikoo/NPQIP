@@ -1,0 +1,202 @@
+﻿@model NPQIP.ViewModel.ReviewOverviewViewModel
+
+@{
+    bool completed = true;
+
+    if (Model.NumberOfCompletedChecklist0 == Model.NumberOfChecklist0)
+    { ViewBag.temclass0 = "btn btn-success  font-white"; }
+    else
+    {
+        ViewBag.temclass0 = "btn btn-info font-white";
+        completed = false;
+    }
+    if (Model.ExperimentTarget!=null && Model.ExperimentTarget.Contains("in vivo"))
+    {
+        ViewBag.temclass16 = "hidden";
+
+        if (Model.NumberOfCompletedChecklist17 == Model.NumberOfChecklist17)
+        { ViewBag.temclass17 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass17 = "btn btn-info font-white";
+            completed = false;
+        }
+    }
+    else if (Model.ExperimentTarget != null && Model.ExperimentTarget.Contains("vitro"))
+    {
+        if (Model.NumberOfCompletedChecklist16 == Model.NumberOfChecklist16)
+        { ViewBag.temclass16 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass16 = "btn btn-info font-white";
+            completed = false;
+        }
+
+        ViewBag.temclass17 = "hidden";
+    }
+    else if (Model.ExperimentTarget != null && Model.ExperimentTarget.Contains("both"))
+    {
+
+        if (Model.NumberOfCompletedChecklist16 == Model.NumberOfChecklist16)
+        { ViewBag.temclass16 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass16 = "btn btn-info font-white";
+            completed = false;
+        }
+
+        if (Model.NumberOfCompletedChecklist17 == Model.NumberOfChecklist17)
+        { ViewBag.temclass17 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass17 = "btn btn-info font-white";
+            completed = false;
+        }
+    }
+    else
+    {
+        ViewBag.temclass16 = "hidden";
+        ViewBag.temclass17 = "hidden";
+    }
+
+    if (Model.ExperimentTarget8 != null && Model.ExperimentTarget8 == "yes")
+    {
+        if (Model.NumberOfCompletedChecklist8 == Model.NumberOfChecklist8)
+        { ViewBag.temclass8 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass8 = " btn btn-info font-white ";
+            completed = false;
+        }
+    }
+    else { ViewBag.temclass8 = "hidden"; }
+
+    if (Model.ExperimentTarget != null && Model.ExperimentTarget == "")
+    {
+        ViewBag.temclass9 = "hidden";
+    }
+    else
+    {
+        if (Model.NumberOfCompletedChecklist9 == Model.NumberOfChecklist9)
+        { ViewBag.temclass9 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass9 = "btn btn-info font-white";
+            completed = false;
+        }
+    }
+    if (Model.ExperimentTarget10 != null && Model.ExperimentTarget10 == "yes")
+    {
+        if (Model.NumberOfCompletedChecklist10 == Model.NumberOfChecklist10)
+        { ViewBag.temclass10 = "btn btn-success  font-white"; }
+        else
+        {
+            ViewBag.temclass10 = "btn btn-info font-white";
+            completed = false;
+        }
+    }
+    else
+    {
+        ViewBag.temclass10 = "hidden";
+    }
+
+    string[] mystr = new string[2];
+    mystr[0] = Model.ExperimentTarget8;
+    mystr[1] = Model.ExperimentTarget10;
+}
+
+<h2>@ViewBag.Title <small class="green">- Manuscript No. @Model.PublicationVM.PublicationID</small>
+</h2>
+<div class="col-md-8 col-md-offset-1 col-xs-12">
+    <br />
+    <br />
+    <br />
+    <div class="responsive-table">
+        <table class="table">
+            <tr>
+                <td>Read Manuscript </td>
+                <td>
+                    <span class="fa-stack fa-2x program">
+                        <a href="@Url.Action("Read", "Review", new { id = Model.PublicationVM.PublicationID })"  target = "_blank">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+                        </a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>Study Content</td>
+                <td><a class="@ViewBag.temclass0"  href = "@Url.Action("Review", "Review", new { reviewType = "Question0", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist0) / @Model.NumberOfChecklist0 </span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Section(1-6) in vitro</td>
+                <td><a class="@ViewBag.temclass16"   href = "@Url.Action("Review", "Review", new { reviewType = "Question16", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist16) / @Model.NumberOfChecklist16</span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Section(1-7) in vivo</td>
+                <td><a class="@ViewBag.temclass17"  href = "@Url.Action("Review", "Review", new { reviewType = "Question17", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist17) / @Model.NumberOfChecklist17 </span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Section 8</td>
+                <td><a class="@ViewBag.temclass8"  href = "@Url.Action("Review", "Review", new { reviewType = "Question8", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist8) / @Model.NumberOfChecklist8</span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Section 9</td>
+                <td><a class="@ViewBag.temclass9"  href = "@Url.Action("Review", "Review", new { reviewType = "Question9", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist9) / @Model.NumberOfChecklist9 </span></a>
+                </td>
+            </tr>
+            <tr>
+                <td>Section 10</td>
+                <td><a class="@ViewBag.temclass10"   href = "@Url.Action("Review", "Review", new { reviewType = "Question10", id = Model.PublicationVM.PublicationID })"><i class="fa fa-pencil">&nbsp</i><span class="badge">@Html.DisplayFor(model => model.NumberOfCompletedChecklist10) / @Model.NumberOfChecklist10 </span></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <br />
+    <br />
+
+</div>
+
+<div class="col-md-4 col-md-offset-4">
+    @if (Model.PublicationVM.Training)
+    {
+        if (completed == true)
+        {
+       
+        <a class="btn btn-success  font-white btn-lg center-block font-white" href="@Url.Action("Score", new { id = Model.PublicationVM.PublicationID })">Score my review</a>
+            
+        }
+        else
+        {
+        <a class="btn btn-success  font-white btn-lg center-block font-white disabled" href="@Url.Action("Score", new { id = Model.PublicationVM.PublicationID })">Score my review</a>
+
+        }
+
+    }
+    else
+    {
+        if (completed)
+        {
+            using (Html.BeginForm("CompleteReview", "Review"))
+            {
+        @*@Html.HiddenFor(model => model.PublicationVM.PublicationID)*@
+
+                <input name="PublicationID"  type="hidden" value="@Model.PublicationVM.PublicationID" />
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-success  font-white btn-lg center-block font-white">Submit my review </button>
+     
+            }            
+        }
+        else
+        {
+        <a class="btn btn-success  font-white btn-lg center-block font-white disabled" href="#">Submit my review</a>
+        }
+    }
+
+    <br />
+    <br />
+</div>
